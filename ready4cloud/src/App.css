@@ -1,0 +1,149 @@
+html {
+  height: 100%;
+  width: 100%;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  color: white !important;
+  background: rgb(2, 0, 36);
+  background-repeat: no-repeat;
+  background: linear-gradient(45deg, #020024 0%, #393e46 36%, #00d4ff 100%);
+}
+
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  height: 90.9vh;
+}
+
+.slider-container {
+  display: flex;
+  flex-direction: column;
+  max-width: 130vh;
+  height: fit-content;
+  color: black;
+  font-size: x-large;
+  box-shadow: 0px 0px 10px 4px #393E46;
+  border-radius: 25px;
+  background-color: white;
+  z-index: 2;
+}
+
+.navigation-container {
+  position: fixed;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  top: 50%;
+  left: 17;
+  transform: translateY(-50%);
+  z-index: 1;
+}
+
+.navigation-container button {
+  margin: 0 1em;
+}
+
+div {
+  margin: 2px;
+  padding: 3px;
+}
+
+span {
+  font-size: x-large;
+  font-weight: bold;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 1em;
+  width: 130vh;
+}
+
+h2 {
+  margin-bottom: 10px !important;
+}
+
+.slick-prev {
+  left: -5px !important;
+  width: 35px !important;
+  height: 35px !important;
+  background-color: #008CBA !important;
+  z-index: 3;
+}
+
+.slick-next {
+  right: -5px !important;
+  width: 35px !important;
+  height: 35px !important;
+  background-color: #008CBA !important;
+}
+
+.slick-dots {
+  bottom: 10px !important;
+}
+
+.slick-disabled {
+  background-color: #888 !important;
+  pointer-events: none;
+}
+
+.slick-list {
+  margin-left: 25px !important;
+}
+
+.slick-current {
+  width: 1150px !important;
+}
+
+button {
+  background-color: #008CBA;
+  border: none;
+  color: white;
+  padding: 10px 20px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 20px !important;
+  margin: 4px 2px !important;
+  transition-duration: 0.4s;
+  cursor: pointer !important;
+  border-radius: 8px !important;
+}
+
+button:hover {
+  background-color: white;
+  color: black;
+  border: 2px solid #008CBA;
+}
+
+button:disabled {
+  background-color: #888;
+  pointer-events: none;
+}
+
+.Info-button button {
+  font-size: 20px !important;
+  font-weight: 600;
+}
+
+.legend-table, .legend-table td {
+  border: 1px solid black;
+  border-collapse: collapse;
+}
+
+.legend-table-percentage {
+  padding-left: 10px !important;
+}
+
+li {
+  margin-bottom: 10px;
+}
