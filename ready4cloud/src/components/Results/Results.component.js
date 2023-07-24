@@ -33,13 +33,13 @@ function Results({ answers }) {
     if (percentageYes <= 9) {
       return { color: "white", text: "" };
     } else if (percentageYes <= 15) {
-      return { color: "#ff4d4d", text: "nicht erreicht mit " };
+      return { color: "#ff4d4d", text: "nicht empfohlen mit " };
     } else if (percentageYes <= 50) {
-      return { color: "orange", text: "Teilweise erreicht mit " };
+      return { color: "orange", text: "Teilweise empfohlen mit " };
     } else if (percentageYes <= 85) {
-      return { color: "yellow", text: "Weitgehend erreicht mit " };
+      return { color: "yellow", text: "Weitgehend empfohlen mit " };
     } else {
-      return { color: "lightgreen", text: "Voll erreicht mit " };
+      return { color: "lightgreen", text: "Voll empfohlen mit " };
     }
   };
 
@@ -64,7 +64,7 @@ function Results({ answers }) {
           fontSize: "xxx-large",
         }}
       >
-        <p>Avg. Result:</p> <b>{averagePercentage}%</b>
+        <p>Durchschn. Ergebnis:</p> <b>{averagePercentage}%</b>
       </div>
       <div className="containers-topics">
         {results.map((result) => {

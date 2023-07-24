@@ -1,5 +1,5 @@
 TODOS:
-// Done , !! Wont implement it
+//  === Done , !! === Wont implement it
 
 Make a Statement about the result of all Questions Compined.
 Handle the Download funcktion to be better.
@@ -8,7 +8,12 @@ Make a final thank you note after the results are shown/the file is downloaded.
 Make a Notifier if not all Questions has been Answered
 Write Unit-tests for the whole App.
 Add the Percentage value and Color to the MEAN value.
+Make a Third Option for answer of Questions (idk)
+Gather all "idk" Questions in a list when Producing the end result.
 
+//Go over the Questions and translate/fix the wording of the Questions, remove all abbreviations.
+//Translate all English text into German
+//Change the Size of the Slider dots.
 //Make a modal that shows up first thing when app launches with a legend and relevant info about the Questions. Style it Correctly!
 //Make all Elements and fonts bigger
 //Add a tooltip for the Information Button.
@@ -21,3 +26,4 @@ Add the Percentage value and Color to the MEAN value.
 
 !!Add number of Subtopics to the footer of the Questions for the User to know how many Questions are left to answer.
 !!Remove the Static Component form the Topic slider Buttons.
+!!Knöpfe "Unterseite" oder "Nächstes Thema"

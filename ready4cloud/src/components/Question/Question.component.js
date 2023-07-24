@@ -19,13 +19,13 @@ function Question({ id, text, handleAnswer, answer }) {
           onClick={() => handleClick(true)}
           className={answer === true ? "button-clicked" : ""}
         >
-          YES
+          JA
         </button>
         <button
           onClick={() => handleClick(false)}
           className={answer === false ? "button-clicked" : ""}
         >
-          NO
+          NEIN
         </button>
       </div>
     </div>
