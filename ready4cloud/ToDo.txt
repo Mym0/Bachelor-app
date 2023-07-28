@@ -8,9 +8,11 @@ Make a final thank you note after the results are shown/the file is downloaded.
 Make a Notifier if not all Questions has been Answered
 Write Unit-tests for the whole App.
 Add the Percentage value and Color to the MEAN value.
-Make a Third Option for answer of Questions (idk)
-Gather all "idk" Questions in a list when Producing the end result.
+Fix resposive Layout Problem.
+When Scrolling through topics, the first subtopic should always be the one visible.
 
+//Gather all "idk" Questions in a PDF File when Producing the end result.
+//Make a Third Option for answer of Questions (idk)
 //Go over the Questions and translate/fix the wording of the Questions, remove all abbreviations.
 //Translate all English text into German
 //Change the Size of the Slider dots.

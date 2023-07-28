@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import "./Question.css";
 
 function Question({ id, text, handleAnswer, answer }) {
-
   const handleClick = async (ans) => {
     await handleAnswer(id, ans);
   };
@@ -26,6 +25,12 @@ function Question({ id, text, handleAnswer, answer }) {
           className={answer === false ? "button-clicked" : ""}
         >
           NEIN
+        </button>
+        <button
+          onClick={() => handleClick("idk")}
+          className={answer === "idk" ? "button-clicked" : ""}
+        >
+          Ich weiss nicht
         </button>
       </div>
     </div>

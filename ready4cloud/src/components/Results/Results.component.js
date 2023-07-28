@@ -1,7 +1,8 @@
 import React from "react";
+import { jsPDF } from "jspdf";
 import { questionCatalog } from "../../utils/questionCatalog";
 
-function Results({ answers }) {
+function Results({ answers, unknownAnswer }) {
   const results = questionCatalog.map((topic) => {
     const totalQuestions = topic.subTopic.reduce(
       (total, subtopic) => total + subtopic.questions.length,
@@ -44,6 +45,32 @@ function Results({ answers }) {
   };
 
   // const averageRating = getRating(averagePercentage);
+  const unknownQuestions = unknownAnswer.map((id) => {
+    const [subtopicName, index] = id.split("-");
+    const subtopic = questionCatalog
+      .flatMap((topic) => topic.subTopic)
+      .find((st) => st.name === subtopicName);
+    return subtopic.questions[index];
+  });
+
+  const downloadUnknownQuestionsPdf = () => {
+    const doc = new jsPDF();
+
+    doc.setFontSize(16);
+    doc.text("Unanswered Questions: ", 5, 10);
+
+    let y = 20;
+
+    unknownQuestions.forEach((question, index) => {
+      const lines = doc.splitTextToSize("- " + question, 180);
+      doc.text(lines, 10, y);
+      y += 10 * lines.length;
+    });
+
+    doc.save("Ungeklaerte_Fragen.pdf");
+  };
+
+  const hasUnknownQuestions = unknownQuestions.length > 0;
 
   return (
     <div
@@ -56,15 +83,32 @@ function Results({ answers }) {
       }}
     >
       <div
-        className="containers-avgresult"
+        className="container-results"
         style={{
-          borderRadius: "10px",
-          boxShadow: "1px 1px 4px 2px #393E46",
-          padding: "9px",
-          fontSize: "xxx-large",
+          display: "flex",
+          flexDirection: "column",
+          justifyContent: "space-between",
         }}
       >
-        <p>Durchschn. Ergebnis:</p> <b>{averagePercentage}%</b>
+        <div
+          className="containers-avgresult"
+          style={{
+            borderRadius: "10px",
+            boxShadow: "1px 1px 4px 2px #393E46",
+            padding: "9px",
+            fontSize: "xxx-large",
+          }}
+        >
+          <p>Durchschn. Ergebnis:</p> <b>{averagePercentage}%</b>
+        </div>
+        <div>
+          <button
+            onClick={downloadUnknownQuestionsPdf}
+            disabled={!hasUnknownQuestions}
+          >
+            Ich weiss nicht Fragen Herunterladen
+          </button>
+        </div>
       </div>
       <div className="containers-topics">
         {results.map((result) => {

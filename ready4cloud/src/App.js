@@ -13,6 +13,7 @@ import { Modal, ModalHeader, ModalBody, ModalFooter } from "reactstrap";
 
 function App() {
   const [answers, setAnswers] = useState({});
+  const [unknownAnswer, setUnknownAnswer] = useState([]);
   const [currentTopicIndex, setCurrentTopicIndex] = useState(0);
   const [modal, setModal] = useState(false);
   const [reset, setReset] = useState(false);
@@ -23,6 +24,16 @@ function App() {
       ...answers,
       [id]: answer,
     });
+
+    if (answer === "idk") {
+      if (!unknownAnswer.includes(id)) {
+        setUnknownAnswer([...unknownAnswer, id]);
+      }
+    } else {
+      if (unknownAnswer.includes(id)) {
+        setUnknownAnswer(unknownAnswer.filter((unkId) => unkId !== id));
+      }
+    }
   };
 
   const resetAnswers = () => {
@@ -136,7 +147,7 @@ function App() {
           <h1>Ergebnis</h1>
         </ModalHeader>
         <ModalBody>
-          <Results answers={answers} />
+          <Results answers={answers} unknownAnswer={unknownAnswer} />
         </ModalBody>
         <ModalFooter>
           <button onClick={toggle}>Schließen</button>
@@ -157,8 +168,9 @@ function App() {
         <ModalBody>
           <ul style={{ marginBottom: "2rem" }}>
             <li>
-              Jedes Thema enthält einige Unterthemen, zu Jedem Unterthema werden
-              Ja/Nein Fragen gestellt, die Sie beantworten.
+              Jedes Thema enthält diverse Unterthemen, zu Jedem Unterthema
+              werden Fragen gestellt, die Sie mit Ja/Nein/Ich weiss nicht
+              beantworten.
             </li>
             <li>
               Jedes Thema wird entsprechend Ihren Antworten bewertet, eine
