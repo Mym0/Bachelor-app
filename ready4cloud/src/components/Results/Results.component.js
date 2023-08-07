@@ -47,10 +47,9 @@ function Results({ answers, unknownAnswer }) {
   // const averageRating = getRating(averagePercentage);
   const unknownQuestions = unknownAnswer.map((id) => {
     const [subtopicName, index] = id.split("-");
-    const subtopic = questionCatalog
-      .flatMap((topic) => topic.subTopic)
-      .find((st) => st.name === subtopicName);
-    return subtopic.questions[index];
+    const allSubtopics = questionCatalog.flatMap((topic) => topic.subTopic);
+    const subtopic = allSubtopics.find((st) => st.name === subtopicName);
+    return subtopic ? subtopic.questions[index] : "Error: subtopic not found";
   });
 
   const downloadUnknownQuestionsPdf = () => {
