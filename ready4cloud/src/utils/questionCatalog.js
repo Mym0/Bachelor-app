@@ -1,23 +1,23 @@
 export const questionCatalog = [
   {
-    topic: "SystemAndApplikationManagement",
+    topic: "System- und Anwendungsmanagement",
     subTopic: [
       {
         name: "Monitoring",
         questions: [
-          "Führt der Provider eine automatisierte Systemüberwachung durch?",
-          "Werden Systemressourcen: wie z.B. Festplattenkapazität, RAM-Ausnutzung, CPU-Nutzung überwacht?",
-          "Werden Dienste-Verfügbarkeit: u.a. Datenbank-Dienste, IIS-relevante Dienste überwacht?",
-          "Werden Konnektivität: VPN, Internet, Zugriffe beteiligter Systeme, Mailserver überwacht?",
+          "Führt der Cloudanbieter eine automatisierte Systemüberwachung durch?",
+          "Werden Systemressourcen wie z.B. Festplattenkapazität, RAM-Ausnutzung, CPU-Nutzung überwacht?",
+          "Werden Verfügbarkeiten u.a. Datenbank-Dienste, IIS-relevante Dienste überwacht?",
+          "Werden Verbindungen wie z.B. VPN, Internet, Zugriffe beteiligter Systeme, Mailserver überwacht?",
         ],
       },
       {
         name: "Systempflege",
         questions: [
-          "Werden durch den Anbieter alle relevanten Systeme  für die Bereitstellung der SaaS-Lösung gewartet?",
-          "Prüft der Provider die Verfügbarkeit von Systemupdates /Sicherheitsupdates von Dritthersteller (bspw. Microsoft)	",
-          "Werden anstehende Systemupdates mittels eines geplanten und abgestimmten Change durchgeführt? (mit dem SM der EnBW/ den Fachbereichen)",
-          "Werden notwendige Datenträgerbereinigungen (z.B. Löschen von Systemlogs) durch den Anbieter durchgeführt?",
+          "Werden durch den Cloudanbieter alle relevanten Systeme für die Bereitstellung der SaaS-Lösung gewartet?",
+          "Prüft der Cloudanbieter die Verfügbarkeit von Systemupdates /Sicherheitsupdates von Dritthersteller (bspw. Microsoft)",
+          "Werden anstehende Systemupdates mittels eines geplanten und abgestimmten Change durchgeführt und mit dem Servicemanager der EnBW IT abgetimmt?",
+          "Werden notwendige Datenträgerbereinigungen (z.B. Löschen von Systemlogs) durch den Cloudanbieter durchgeführt?",
           "Werden nicht erforderliche Systemdaten bei Bedarf nach einer definierten Zeit gelöscht?",
         ],
       },
@@ -35,31 +35,31 @@ export const questionCatalog = [
       {
         name: "Betriebszeiten",
         questions: [
-          "Können die Anforderungen an Betriebszeiten des Geschäftspartners durch die angebotenen Betriebszeiten des CSP erfüllt werden? (z.B. 24/7 Betrieb)",
+          "Können die Anforderungen an Betriebszeiten des Geschäftspartners durch die angebotenen Betriebszeiten des Cloudanbieters erfüllt werden? (z.B. 24/7 Betrieb)",
         ],
       },
       {
         name: "Servicezeiten",
         questions: [
-          "Können die Anforderungen an Servicezeiten des Geschäftspartners durch die angebotenen Servicezeiten des CSP erfüllt werden? (z.B. 24/7 Servicesupport) ",
+          "Können die Anforderungen an Servicezeiten des Geschäftspartners durch die angebotenen Servicezeiten des Cloudanbieters erfüllt werden? (z.B. 24/7 Servicesupport) ",
         ],
       },
       {
         name: "Reaktionszeiten",
         questions: [
-          "Können die Anforderungen an Reaktionszeiten des Geschäftspartners durch die angebotenen Reaktionszeiten des CSP erfüllt werden? (z.B. 24/7 Support) ",
+          "Können die Anforderungen an Reaktionszeiten des Geschäftspartners durch die angebotenen Reaktionszeiten des Cloudanbieters erfüllt werden? (z.B. 24/7 Support) ",
         ],
       },
       {
         name: "Wartungsfenster",
         questions: [
-          "Können geplante Wartungsfenster individuell zwischen Kunde/Geschäftspartner und CSP definiert und ausgehandelt werden?",
+          "Können geplante Wartungsfenster individuell zwischen Kunde/Geschäftspartner und Cloudanbieter definiert und ausgehandelt werden?",
         ],
       },
       {
-        name: "Service-Verfügbarkeit",
+        name: "Service Verfügbarkeit",
         questions: [
-          "Können individuelle - auf die Bedürfnisse des Kunden/Geschäftspartner angepasste Verfügbarkeiten des Service mit dem CSP definiert werden?",
+          "Können individuelle - auf die Bedürfnisse des Kunden/Geschäftspartner angepasste Verfügbarkeiten des Service mit dem Cloudanbieter definiert werden?",
         ],
       },
     ],
@@ -74,7 +74,7 @@ export const questionCatalog = [
         ],
       },
       {
-        name: "Service-Report",
+        name: "Service Report",
         questions: [
           "Gibt es zu jeder gemeldeten Störung oder jedem registrierten Vorfall, der eine Beeinträchtigung der Gesamtverfügbarkeitszeit darstellt und wird ein detaillierter Report inkl. Fehlerbeschreibung, Rootcause-Analyse und ggf. eingeleiteter Maßnahmen zur Vermeidung des Wiederholungsfalls erstellt? Ein solcher Service-Report könnte pro erfasster, betriebsrelevanter Anfrage erstellt werden.",
         ],
@@ -108,19 +108,19 @@ export const questionCatalog = [
       {
         name: "Kommunikation und Transparenz ",
         questions: [
-          "Kann ein Servicemanager Einsicht in Changes beim CSP haben?",
+          "Kann ein Servicemanager Einsicht in Changes beim Cloudanbieter haben?",
         ],
       },
       {
         name: "Kommunikation und Transparenz",
         questions: [
-          "Werden geplante und ungeplante Wartungsarbeiten auf Seiten des CSP an uns Servicemanager kommuniziert?",
+          "Werden geplante und ungeplante Wartungsarbeiten auf Seiten des Cloudanbieter an Servicemanager kommuniziert?",
         ],
       },
       {
         name: "Sicherheitsproaktivität",
         questions: [
-          "Gibt es vom CSP die Möglichkeit proaktiv auf Sicherheitsschwachstellen in der Software/Applikation hingewiesen zu werden?",
+          "Gibt es vom Cloudanbieter die Möglichkeit proaktiv auf Sicherheitsschwachstellen in der Software/Applikation hingewiesen zu werden?",
         ],
       },
     ],

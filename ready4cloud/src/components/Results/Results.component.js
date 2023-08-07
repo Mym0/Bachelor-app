@@ -1,7 +1,8 @@
 import React from "react";
+import { jsPDF } from "jspdf";
 import { questionCatalog } from "../../utils/questionCatalog";
 
-function Results({ answers }) {
+function Results({ answers, unknownAnswer }) {
   const results = questionCatalog.map((topic) => {
     const totalQuestions = topic.subTopic.reduce(
       (total, subtopic) => total + subtopic.questions.length,
@@ -33,17 +34,42 @@ function Results({ answers }) {
     if (percentageYes <= 9) {
       return { color: "white", text: "" };
     } else if (percentageYes <= 15) {
-      return { color: "#ff4d4d", text: "nicht erreicht mit " };
+      return { color: "#ff4d4d", text: "nicht empfohlen mit " };
     } else if (percentageYes <= 50) {
-      return { color: "orange", text: "Teilweise erreicht mit " };
+      return { color: "orange", text: "Teilweise empfohlen mit " };
     } else if (percentageYes <= 85) {
-      return { color: "yellow", text: "Weitgehend erreicht mit " };
+      return { color: "yellow", text: "Weitgehend empfohlen mit " };
     } else {
-      return { color: "lightgreen", text: "Voll erreicht mit " };
+      return { color: "lightgreen", text: "Voll empfohlen mit " };
     }
   };
 
   // const averageRating = getRating(averagePercentage);
+  const unknownQuestions = unknownAnswer.map((id) => {
+    const [subtopicName, index] = id.split("-");
+    const allSubtopics = questionCatalog.flatMap((topic) => topic.subTopic);
+    const subtopic = allSubtopics.find((st) => st.name === subtopicName);
+    return subtopic ? subtopic.questions[index] : "Error: subtopic not found";
+  });
+
+  const downloadUnknownQuestionsPdf = () => {
+    const doc = new jsPDF();
+
+    doc.setFontSize(16);
+    doc.text("Unanswered Questions: ", 5, 10);
+
+    let y = 20;
+
+    unknownQuestions.forEach((question, index) => {
+      const lines = doc.splitTextToSize("- " + question, 180);
+      doc.text(lines, 10, y);
+      y += 10 * lines.length;
+    });
+
+    doc.save("Ungeklaerte_Fragen.pdf");
+  };
+
+  const hasUnknownQuestions = unknownQuestions.length > 0;
 
   return (
     <div
@@ -56,15 +82,32 @@ function Results({ answers }) {
       }}
     >
       <div
-        className="containers-avgresult"
+        className="container-results"
         style={{
-          borderRadius: "10px",
-          boxShadow: "1px 1px 4px 2px #393E46",
-          padding: "9px",
-          fontSize: "xxx-large",
+          display: "flex",
+          flexDirection: "column",
+          justifyContent: "space-between",
         }}
       >
-        <p>Avg. Result:</p> <b>{averagePercentage}%</b>
+        <div
+          className="containers-avgresult"
+          style={{
+            borderRadius: "10px",
+            boxShadow: "1px 1px 4px 2px #393E46",
+            padding: "9px",
+            fontSize: "xxx-large",
+          }}
+        >
+          <p>Durchschn. Ergebnis:</p> <b>{averagePercentage}%</b>
+        </div>
+        <div>
+          <button
+            onClick={downloadUnknownQuestionsPdf}
+            disabled={!hasUnknownQuestions}
+          >
+            Ich weiss nicht Fragen Herunterladen
+          </button>
+        </div>
       </div>
       <div className="containers-topics">
         {results.map((result) => {

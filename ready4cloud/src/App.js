@@ -1,5 +1,5 @@
 import "./App.css";
-import React, { useEffect, useState } from "react";
+import React, { useRef, useState } from "react";
 import { questionCatalog } from "./utils/questionCatalog";
 import Subtopic from "./components/Subtopic/Subtopic.component";
 import Results from "./components/Results/Results.component";
@@ -8,25 +8,38 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { Tooltip } from "react-tooltip";
-import { saveAs } from "file-saver";
 import { Modal, ModalHeader, ModalBody, ModalFooter } from "reactstrap";
 
 function App() {
   const [answers, setAnswers] = useState({});
+  const [unknownAnswer, setUnknownAnswer] = useState([]);
   const [currentTopicIndex, setCurrentTopicIndex] = useState(0);
   const [modal, setModal] = useState(false);
   const [reset, setReset] = useState(false);
   const [infoModal, setInfoModal] = useState(false);
+  const sliderRef = useRef(null);
 
   const handleAnswer = (id, answer) => {
+    // console.log('Setting answer:', id, answer); // Log the ID and answer
     setAnswers({
       ...answers,
       [id]: answer,
     });
+
+    if (answer === "idk") {
+      if (!unknownAnswer.includes(id)) {
+        setUnknownAnswer([...unknownAnswer, id]);
+      }
+    } else {
+      if (unknownAnswer.includes(id)) {
+        setUnknownAnswer(unknownAnswer.filter((unkId) => unkId !== id));
+      }
+    }
   };
 
   const resetAnswers = () => {
     setAnswers({});
+    setUnknownAnswer([]);
     setCurrentTopicIndex(0);
     setReset(!reset);
   };
@@ -43,24 +56,16 @@ function App() {
 
   const nextTopic = () => {
     if (currentTopicIndex < questionCatalog.length - 1) {
-      setTimeout(() => {
-        setCurrentTopicIndex(currentTopicIndex + 1);
-      }, 0);
+      setCurrentTopicIndex(currentTopicIndex + 1);
+      sliderRef.current.slickGoTo(0);
     }
   };
 
   const prevTopic = () => {
     if (currentTopicIndex > 0) {
-      setTimeout(() => {
-        setCurrentTopicIndex(currentTopicIndex - 1);
-      }, 0);
+      setCurrentTopicIndex(currentTopicIndex - 1);
+      sliderRef.current.slickGoTo(0);
     }
-  };
-
-  const handleDownload = () => {
-    const resultsData = JSON.stringify(answers);
-    const blob = new Blob([resultsData], { type: "text/plain;charset=utf-8" });
-    saveAs(blob, "ready4cloud.txt");
   };
 
   const topic = questionCatalog[currentTopicIndex];
@@ -73,11 +78,15 @@ function App() {
       <div className="header">
         <h2>{topic.topic}</h2>
         <p className="numering-container">
-          <span>{currentTopicIndex + 1}</span> / {questionCatalog.length} Topics
+          <span>{currentTopicIndex + 1}</span> / {questionCatalog.length} Thema
         </p>
       </div>
       <div className="slider-container">
-        <Slider {...settings} key={reset ? "reset" : "not-reset"}>
+        <Slider
+          ref={sliderRef}
+          {...settings}
+          key={reset ? "reset" : "not-reset"}
+        >
           {topic.subTopic.map((subtopic, index) => (
             <div key={index} className="subtopics-container">
               <Subtopic
@@ -90,15 +99,19 @@ function App() {
         </Slider>
       </div>
       <div className="navigation-container">
-        <button onClick={prevTopic} disabled={currentTopicIndex === 0}>
-          Previous Topic
-        </button>
-        <button
-          onClick={nextTopic}
-          disabled={currentTopicIndex === questionCatalog.length - 1}
-        >
-          Next Topic
-        </button>
+        <div>
+          <button onClick={prevTopic} disabled={currentTopicIndex === 0}>
+            Vorheriges Thema
+          </button>
+        </div>
+        <div>
+          <button
+            onClick={nextTopic}
+            disabled={currentTopicIndex === questionCatalog.length - 1}
+          >
+            Nächstes Thema
+          </button>
+        </div>
       </div>
       <div
         className="buttons-container"
@@ -112,8 +125,8 @@ function App() {
           <button onClick={toggleInfo}>!</button>
         </div>
         <div className="interaction-buttons">
-          <button onClick={toggle}>Submit</button>
-          <button onClick={resetAnswers}>Reset</button>
+          <button onClick={toggle}>Bestätigen</button>
+          <button onClick={resetAnswers}>Zurücksetzen</button>
         </div>
       </div>
       <Tooltip
@@ -133,14 +146,13 @@ function App() {
         style={{ color: "black", fontSize: "large" }}
       >
         <ModalHeader toggle={null}>
-          <h1>Results</h1>
+          <h1>Ergebnis</h1>
         </ModalHeader>
         <ModalBody>
-          <Results answers={answers} />
+          <Results answers={answers} unknownAnswer={unknownAnswer} />
         </ModalBody>
         <ModalFooter>
-          <button onClick={toggle}>Close Results</button>
-          {/* <button onClick={handleDownload}>Download Results</button> */}
+          <button onClick={toggle}>Schließen</button>
         </ModalFooter>
       </Modal>
       <Modal
@@ -152,27 +164,28 @@ function App() {
         style={{ color: "black", fontSize: "xx-large" }}
       >
         <ModalHeader toggle={null}>
-          <h1> How to use the App:</h1>
+          <h1> Wie benutze ich die App ?</h1>
         </ModalHeader>
         <ModalBody>
-          <ul style={{ marginBottom: "3rem" }}>
+          <ul style={{ marginBottom: "2rem" }}>
             <li>
-              Jedes Topic enthält einige Subtopics, zu Jedem Subtopic werden
-              Ja/Nein Fragen gestellt, die Sie beantworten sollen.
+              Jedes Thema enthält diverse Unterthemen, zu Jedem Unterthema
+              werden Fragen gestellt, die Sie mit Ja/Nein/Ich weiss nicht
+              beantworten.
             </li>
             <li>
-              Jedes Topic wird entsprechend Ihren Antworten bewertet, eine
+              Jedes Thema wird entsprechend Ihren Antworten bewertet, eine
               Legende hierfür finden Sie wie folgt.
             </li>
             <li>
-              Beim Submitten der Antworten erhalten Sie ein Ergebnis mit einem
-              Prozentualer Wert, der angibt, wie wahrscheinlich es ist, dass Ihr
+              Beim Bestätigen der Antworten erhalten Sie ein Ergebnis mit einem
+              Prozentualen Wert, der angibt, wie wahrscheinlich es ist, dass Ihr
               System in einem Cloud-Dienst integriert werden sollte.
             </li>
           </ul>
           <table
             className="legend-table"
-            style={{ float: "right", width: "55%" }}
+            style={{ float: "right", width: "60%" }}
           >
             <tbody>
               <tr>
@@ -182,25 +195,25 @@ function App() {
               </tr>
               <tr>
                 <td className="legend-table-percentage">
-                  Nicht erreicht (0 - 15)%{" "}
+                  Nicht empfohlen (0 - 15)%{" "}
                 </td>
                 <td style={{ backgroundColor: "#ff4d4d", width: "8rem" }}></td>
               </tr>
               <tr>
                 <td className="legend-table-percentage">
-                  Teilweise erreicht (16 - 50)%{" "}
+                  Teilweise empfohlen (16 - 50)%{" "}
                 </td>
                 <td style={{ backgroundColor: "orange", width: "8rem" }}></td>
               </tr>
               <tr>
                 <td className="legend-table-percentage">
-                  Weitgehend erreicht (51 - 85)%{" "}
+                  Weitgehend empfohlen (51 - 85)%{" "}
                 </td>
                 <td style={{ backgroundColor: "yellow", width: "8rem" }}></td>
               </tr>
               <tr>
                 <td className="legend-table-percentage">
-                  Voll erreicht (86 - 100)%{" "}
+                  Voll empfohlen (86 - 100)%{" "}
                 </td>
                 <td
                   style={{ backgroundColor: "lightgreen", width: "8rem" }}
@@ -210,7 +223,7 @@ function App() {
           </table>
         </ModalBody>
         <ModalFooter>
-          <button onClick={toggleInfo}>Close</button>
+          <button onClick={toggleInfo}>Schließen</button>
         </ModalFooter>
       </Modal>
     </div>
