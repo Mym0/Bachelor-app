@@ -1,16 +1,12 @@
 TODOS:
-//  === Done , !! === Wont implement it
+//  === Done , !! === Won't implement it , && can't implement it
 
-Make a Statement about the result of all Questions Compined.
-Handle the Download funcktion to be better.
-Add an optional field asking for the name of the System to be shown on the Report.
-Make a final thank you note after the results are shown/the file is downloaded.
-Make a Notifier if not all Questions has been Answered
 Write Unit-tests for the whole App.
-Add the Percentage value and Color to the MEAN value.
 Fix resposive Layout Problem.
-When Scrolling through topics, the first subtopic should always be the one visible.
 
+//Clear the unaswerd Questions array when reset button is clicked.
+//Find out why some Question dont return null subtopics.
+//When Scrolling through topics, the first subtopic should always be the one visible.
 //Gather all "idk" Questions in a PDF File when Producing the end result.
 //Make a Third Option for answer of Questions (idk)
 //Go over the Questions and translate/fix the wording of the Questions, remove all abbreviations.
@@ -19,13 +15,21 @@ When Scrolling through topics, the first subtopic should always be the one visib
 //Make a modal that shows up first thing when app launches with a legend and relevant info about the Questions. Style it Correctly!
 //Make all Elements and fonts bigger
 //Add a tooltip for the Information Button.
+//Add the Percentage value to the MEAN value.
 //Fix the identical names of Subtopics that leads to faulty measurments.
 //Make Reset button when clicked it returns the current silder to the very first Topic/Subtopic.
+//Handle the Download funcktion to be better.
 //When a Question is answerd, the State and Style of the Buttons should be saved across all Topics.
 //Fix the width problem that makes the Questions of more than one Subtopic visible.
 //Add 2 Sliders, one nested in the other to group Topic elements and subtopic elements.
 //Search for a color Pallete that u like to emplement.
 
+!!Make a Statement about the result of all Questions Compined.
 !!Add number of Subtopics to the footer of the Questions for the User to know how many Questions are left to answer.
 !!Remove the Static Component form the Topic slider Buttons.
+!!Make a Notifier if not all Questions has been Answered
 !!Knöpfe "Unterseite" oder "Nächstes Thema"
+!!Make a final thank you note after the results are shown/the file is downloaded.
+!!Add an optional field asking for the name of the System to be shown on the Report.
+
+&&Find out why the last subtopic Question gets reseted when scrolling through the topics.
