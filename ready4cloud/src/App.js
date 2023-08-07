@@ -1,5 +1,5 @@
 import "./App.css";
-import React, { useEffect, useState } from "react";
+import React, { useRef, useState } from "react";
 import { questionCatalog } from "./utils/questionCatalog";
 import Subtopic from "./components/Subtopic/Subtopic.component";
 import Results from "./components/Results/Results.component";
@@ -8,7 +8,6 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { Tooltip } from "react-tooltip";
-import { saveAs } from "file-saver";
 import { Modal, ModalHeader, ModalBody, ModalFooter } from "reactstrap";
 
 function App() {
@@ -18,8 +17,10 @@ function App() {
   const [modal, setModal] = useState(false);
   const [reset, setReset] = useState(false);
   const [infoModal, setInfoModal] = useState(false);
+  const sliderRef = useRef(null);
 
   const handleAnswer = (id, answer) => {
+    // console.log('Setting answer:', id, answer); // Log the ID and answer
     setAnswers({
       ...answers,
       [id]: answer,
@@ -38,6 +39,7 @@ function App() {
 
   const resetAnswers = () => {
     setAnswers({});
+    setUnknownAnswer([]);
     setCurrentTopicIndex(0);
     setReset(!reset);
   };
@@ -54,24 +56,16 @@ function App() {
 
   const nextTopic = () => {
     if (currentTopicIndex < questionCatalog.length - 1) {
-      setTimeout(() => {
-        setCurrentTopicIndex(currentTopicIndex + 1);
-      }, 0);
+      setCurrentTopicIndex(currentTopicIndex + 1);
+      sliderRef.current.slickGoTo(0);
     }
   };
 
   const prevTopic = () => {
     if (currentTopicIndex > 0) {
-      setTimeout(() => {
-        setCurrentTopicIndex(currentTopicIndex - 1);
-      }, 0);
+      setCurrentTopicIndex(currentTopicIndex - 1);
+      sliderRef.current.slickGoTo(0);
     }
-  };
-
-  const handleDownload = () => {
-    const resultsData = JSON.stringify(answers);
-    const blob = new Blob([resultsData], { type: "text/plain;charset=utf-8" });
-    saveAs(blob, "ready4cloud.txt");
   };
 
   const topic = questionCatalog[currentTopicIndex];
@@ -88,7 +82,11 @@ function App() {
         </p>
       </div>
       <div className="slider-container">
-        <Slider {...settings} key={reset ? "reset" : "not-reset"}>
+        <Slider
+          ref={sliderRef}
+          {...settings}
+          key={reset ? "reset" : "not-reset"}
+        >
           {topic.subTopic.map((subtopic, index) => (
             <div key={index} className="subtopics-container">
               <Subtopic
@@ -101,15 +99,19 @@ function App() {
         </Slider>
       </div>
       <div className="navigation-container">
-        <button onClick={prevTopic} disabled={currentTopicIndex === 0}>
-          Vorheriges Thema
-        </button>
-        <button
-          onClick={nextTopic}
-          disabled={currentTopicIndex === questionCatalog.length - 1}
-        >
-          Nächstes Thema
-        </button>
+        <div>
+          <button onClick={prevTopic} disabled={currentTopicIndex === 0}>
+            Vorheriges Thema
+          </button>
+        </div>
+        <div>
+          <button
+            onClick={nextTopic}
+            disabled={currentTopicIndex === questionCatalog.length - 1}
+          >
+            Nächstes Thema
+          </button>
+        </div>
       </div>
       <div
         className="buttons-container"
@@ -151,7 +153,6 @@ function App() {
         </ModalBody>
         <ModalFooter>
           <button onClick={toggle}>Schließen</button>
-          {/* <button onClick={handleDownload}>Download Results</button> */}
         </ModalFooter>
       </Modal>
       <Modal

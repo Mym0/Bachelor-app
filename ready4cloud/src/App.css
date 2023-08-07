@@ -41,7 +41,6 @@ body {
   align-items: center;
   width: 100%;
   top: 50%;
-  left: 17;
   transform: translateY(-50%);
   z-index: 1;
 }
