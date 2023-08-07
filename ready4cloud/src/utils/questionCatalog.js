@@ -57,7 +57,7 @@ export const questionCatalog = [
         ],
       },
       {
-        name: "Service-Verfügbarkeit",
+        name: "Service Verfügbarkeit",
         questions: [
           "Können individuelle - auf die Bedürfnisse des Kunden/Geschäftspartner angepasste Verfügbarkeiten des Service mit dem Cloudanbieter definiert werden?",
         ],
@@ -74,7 +74,7 @@ export const questionCatalog = [
         ],
       },
       {
-        name: "Service-Report",
+        name: "Service Report",
         questions: [
           "Gibt es zu jeder gemeldeten Störung oder jedem registrierten Vorfall, der eine Beeinträchtigung der Gesamtverfügbarkeitszeit darstellt und wird ein detaillierter Report inkl. Fehlerbeschreibung, Rootcause-Analyse und ggf. eingeleiteter Maßnahmen zur Vermeidung des Wiederholungsfalls erstellt? Ein solcher Service-Report könnte pro erfasster, betriebsrelevanter Anfrage erstellt werden.",
         ],
