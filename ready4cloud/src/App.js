@@ -1,14 +1,22 @@
-import "./App.css";
-import React, { useRef, useState } from "react";
+import React, { useState, useEffect } from "react";
 import { questionCatalog } from "./utils/questionCatalog";
 import Subtopic from "./components/Subtopic/Subtopic.component";
 import Results from "./components/Results/Results.component";
-import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import "bootstrap/dist/css/bootstrap.min.css";
+import "./App.css";
 import { Tooltip } from "react-tooltip";
-import { Modal, ModalHeader, ModalBody, ModalFooter } from "reactstrap";
+import {
+  Modal,
+  ModalHeader,
+  ModalBody,
+  ModalFooter,
+  CarouselItem,
+  Carousel,
+  CarouselControl,
+  CarouselIndicators,
+} from "reactstrap";
 
 function App() {
   const [answers, setAnswers] = useState({});
@@ -17,10 +25,40 @@ function App() {
   const [modal, setModal] = useState(false);
   const [reset, setReset] = useState(false);
   const [infoModal, setInfoModal] = useState(false);
-  const sliderRef = useRef(null);
+
+  const [activeIndex, setActiveIndex] = useState(0);
+  const [animating, setAnimating] = useState(false);
+  const topic = questionCatalog[currentTopicIndex];
+  const items = questionCatalog[currentTopicIndex].subTopic;
+
+  const next = () => {
+    if (animating) return;
+    if (activeIndex === items.length - 1) {
+      return;
+    }
+    const nextIndex = activeIndex + 1;
+
+    setActiveIndex(nextIndex);
+  };
+
+  const previous = () => {
+    if (animating) return;
+    if (activeIndex === 0) {
+      return;
+    }
+    const nextIndex = activeIndex - 1;
+
+    setActiveIndex(nextIndex);
+  };
+
+  const goToIndex = (newIndex) => {
+    if (animating) return;
+    setActiveIndex(newIndex);
+  };
 
   const handleAnswer = (id, answer) => {
-    // console.log('Setting answer:', id, answer); // Log the ID and answer
+    if (answer === null) return;
+
     setAnswers({
       ...answers,
       [id]: answer,
@@ -37,98 +75,137 @@ function App() {
     }
   };
 
+  useEffect(() => {
+    console.log("answer has changes and became ", answers);
+  }, [answers]);
+
+  {
+    items.map((subtopic) => (
+      <div key={subtopic.name} className="subtopics-container">
+        <Subtopic
+          subtopic={subtopic}
+          handleAnswer={handleAnswer}
+          answers={answers}
+        />
+      </div>
+    ));
+  }
+
+  const slides = items.map((item) => {
+    return (
+      <CarouselItem
+        onExiting={() => setAnimating(true)}
+        onExited={() => setAnimating(false)}
+        key={item.name}
+      >
+        <Subtopic
+          subtopic={item}
+          handleAnswer={handleAnswer}
+          answers={answers}
+        />
+      </CarouselItem>
+    );
+  });
+
   const resetAnswers = () => {
     setAnswers({});
     setUnknownAnswer([]);
     setCurrentTopicIndex(0);
     setReset(!reset);
-  };
-
-  const settings = {
-    dots: true,
-    infinite: false,
-    speed: 500,
-    slidesToShow: 1,
-    slidesToScroll: 1,
-    adaptiveHeight: true,
-    lazyLoad: "ondemand",
+    setActiveIndex(0);
   };
 
   const nextTopic = () => {
     if (currentTopicIndex < questionCatalog.length - 1) {
       setCurrentTopicIndex(currentTopicIndex + 1);
-      sliderRef.current.slickGoTo(0);
+      setActiveIndex(0);
     }
   };
 
   const prevTopic = () => {
     if (currentTopicIndex > 0) {
       setCurrentTopicIndex(currentTopicIndex - 1);
-      sliderRef.current.slickGoTo(0);
+      setActiveIndex(0);
     }
   };
 
-  const topic = questionCatalog[currentTopicIndex];
-
   const toggle = () => setModal(!modal);
   const toggleInfo = () => setInfoModal(!infoModal);
-
   return (
-    <div className="container">
-      <div className="header">
-        <h2>{topic.topic}</h2>
-        <p className="numering-container">
-          <span>{currentTopicIndex + 1}</span> / {questionCatalog.length} Thema
-        </p>
-      </div>
-      <div className="slider-container">
-        <Slider
-          ref={sliderRef}
-          {...settings}
-          key={reset ? "reset" : "not-reset"}
-        >
-          {topic.subTopic.map((subtopic, index) => (
-            <div key={index} className="subtopics-container">
-              <Subtopic
-                subtopic={subtopic}
-                handleAnswer={handleAnswer}
-                answers={answers}
-              />
-            </div>
-          ))}
-        </Slider>
-      </div>
-      <div className="navigation-container">
+    <div className="">
+      <div className="container_header">
         <div>
-          <button onClick={prevTopic} disabled={currentTopicIndex === 0}>
-            Vorheriges Thema
-          </button>
+          <h2>{topic.topic}</h2>
         </div>
         <div>
-          <button
-            onClick={nextTopic}
-            disabled={currentTopicIndex === questionCatalog.length - 1}
+          <p className="numering-container">
+            <span>{currentTopicIndex + 1}</span> / {questionCatalog.length}{" "}
+            Thema
+          </p>
+        </div>
+      </div>
+
+      <div className="container_slider">
+        <div className="container_slider_button">
+          <div>
+            <button onClick={prevTopic} disabled={currentTopicIndex === 0}>
+              Vorheriges Thema
+            </button>
+          </div>
+        </div>
+
+        <div className="slider-container">
+          <Carousel
+            activeIndex={activeIndex}
+            next={next}
+            previous={previous}
+            interval={0}
           >
-            Nächstes Thema
-          </button>
+            <CarouselIndicators
+              items={items}
+              activeIndex={activeIndex}
+              onClickHandler={goToIndex}
+            />
+            {slides}
+            <CarouselControl
+              direction="prev"
+              directionText="Previous"
+              onClickHandler={previous}
+              className={`${activeIndex === 0 ? "disable_button" : ""}`}
+            />
+            <CarouselControl
+              direction="next"
+              directionText="Next"
+              onClickHandler={next}
+              className={`${
+                activeIndex === items.length - 1 ? "disable_button" : ""
+              }`}
+            />
+          </Carousel>
+        </div>
+
+        <div className="container_slider_button">
+          <div>
+            <button
+              onClick={nextTopic}
+              disabled={currentTopicIndex === questionCatalog.length - 1}
+            >
+              Nächstes Thema
+            </button>
+          </div>
         </div>
       </div>
-      <div
-        className="buttons-container"
-        style={{
-          display: "flex",
-          width: "130vh",
-          justifyContent: "space-between",
-        }}
-      >
+
+      <div className="container_footer">
         <div className="Info-button">
           <button onClick={toggleInfo}>!</button>
         </div>
-        <div className="interaction-buttons">
+        <div>
           <button onClick={toggle}>Bestätigen</button>
           <button onClick={resetAnswers}>Zurücksetzen</button>
         </div>
       </div>
+
       <Tooltip
         anchorSelect=".Info-button"
         place="top"
@@ -137,6 +214,7 @@ function App() {
       >
         Info!
       </Tooltip>
+
       <Modal
         isOpen={modal}
         toggle={toggle}
@@ -155,6 +233,7 @@ function App() {
           <button onClick={toggle}>Schließen</button>
         </ModalFooter>
       </Modal>
+
       <Modal
         isOpen={infoModal}
         toggle={toggleInfo}
