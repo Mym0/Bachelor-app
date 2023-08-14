@@ -2,11 +2,6 @@ import React, { useEffect } from "react";
 import "./Question.css";
 
 function Question({ id, text, handleAnswer, answer }) {
-  // useEffect(() => {
-  //   console.log("mounted:", id);
-  //   return () => console.log("unmounted:", id);
-  // }, [id, text]);
-
   const handleClick = async (ans) => {
     await handleAnswer(id, ans);
   };

@@ -44,7 +44,6 @@ function Results({ answers, unknownAnswer }) {
     }
   };
 
-  // const averageRating = getRating(averagePercentage);
   const unknownQuestions = unknownAnswer.map((id) => {
     const [subtopicName, index] = id.split("-");
     const allSubtopics = questionCatalog.flatMap((topic) => topic.subTopic);
