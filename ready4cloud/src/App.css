@@ -121,6 +121,7 @@ li {
   border-radius: 25px;
   background-color: white;
   max-width: 1069.42px;
+  min-width: 1069.42px;
   /* min-height: 679px; */
 }
 
@@ -167,6 +168,8 @@ li {
 @media screen and (max-width: 1024px) {
   .container_header, .slider-container, .container_footer {
     max-width: 707.797px;
+    min-width: 707.797px;
+
   }
 }
 
