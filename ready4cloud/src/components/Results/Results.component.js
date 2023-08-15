@@ -27,11 +27,11 @@ function Results({ answers, unknownAnswer }) {
   });
 
   const averagePercentage =
-    results.reduce((sum, result) => sum + result.percentageYes, 0) /
-    results.length;
+    ((results.reduce((sum, result) => sum + result.percentageYes, 0) /
+    results.length)).toFixed(2);
 
   const getRating = (percentageYes) => {
-    if (percentageYes <= 9) {
+    if (percentageYes <= 1) {
       return { color: "white", text: "" };
     } else if (percentageYes <= 15) {
       return { color: "#ff4d4d", text: "nicht empfohlen mit " };
@@ -44,7 +44,6 @@ function Results({ answers, unknownAnswer }) {
     }
   };
 
-  // const averageRating = getRating(averagePercentage);
   const unknownQuestions = unknownAnswer.map((id) => {
     const [subtopicName, index] = id.split("-");
     const allSubtopics = questionCatalog.flatMap((topic) => topic.subTopic);
@@ -56,7 +55,7 @@ function Results({ answers, unknownAnswer }) {
     const doc = new jsPDF();
 
     doc.setFontSize(16);
-    doc.text("Unanswered Questions: ", 5, 10);
+    doc.text("Zuklärende Fragen: ", 5, 10);
 
     let y = 20;
 

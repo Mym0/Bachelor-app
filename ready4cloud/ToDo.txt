@@ -2,8 +2,9 @@ TODOS:
 //  === Done , !! === Won't implement it , && can't implement it
 
 Write Unit-tests for the whole App.
-Fix resposive Layout Problem.
 
+//Fix resposive Layout Problem.
+//Remove the Static Component form the Topic slider Buttons.
 //Clear the unaswerd Questions array when reset button is clicked.
 //Find out why some Question dont return null subtopics.
 //When Scrolling through topics, the first subtopic should always be the one visible.
@@ -23,13 +24,13 @@ Fix resposive Layout Problem.
 //Fix the width problem that makes the Questions of more than one Subtopic visible.
 //Add 2 Sliders, one nested in the other to group Topic elements and subtopic elements.
 //Search for a color Pallete that u like to emplement.
+//Find out why the last subtopic Question gets reseted when scrolling through the topics.
 
+!!Make a Notifier if not all Questions has been Answered
+!!Add a note in the Header with the estimation of time needed to go thoruogh all Questions.
 !!Make a Statement about the result of all Questions Compined.
 !!Add number of Subtopics to the footer of the Questions for the User to know how many Questions are left to answer.
-!!Remove the Static Component form the Topic slider Buttons.
 !!Make a Notifier if not all Questions has been Answered
 !!Knöpfe "Unterseite" oder "Nächstes Thema"
 !!Make a final thank you note after the results are shown/the file is downloaded.
 !!Add an optional field asking for the name of the System to be shown on the Report.
-
-&&Find out why the last subtopic Question gets reseted when scrolling through the topics.

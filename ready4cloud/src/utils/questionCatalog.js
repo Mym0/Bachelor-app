@@ -27,6 +27,22 @@ export const questionCatalog = [
           "Werden regelmäßig von der Applikation erzeugten Logfiles analysiert und bewertet?",
         ],
       },
+      {
+        name: "Changemanagement",
+        questions: [
+          "Betreibt der Cloud-Service-Provider ein Change- bzw. Testmanagement?",
+        ],
+      },
+      {
+        name: "Verfügbarkeit und Zuverlässigkeit",
+        questions: [
+          "Existieren Mechanismen zur Daten- bzw. Systemwiederherstellung?",
+        ],
+      },
+      {
+        name: "Skalierbarkeit",
+        questions: ["Kann die Kapazität des Cloud-Services angepasst werden?"],
+      },
     ],
   },
   {
@@ -62,6 +78,18 @@ export const questionCatalog = [
           "Können individuelle - auf die Bedürfnisse des Kunden/Geschäftspartner angepasste Verfügbarkeiten des Service mit dem Cloudanbieter definiert werden?",
         ],
       },
+      {
+        name: "Datenmanagement",
+        questions: [
+          "Bietet der Cloud-Service Datenredundanz an mehreren geografischen Standorten?",
+        ],
+      },
+      {
+        name: "Nachhaltigkeit",
+        questions: [
+          "Steht ein nachhaltiges betriebs Konzept bei dem CSP zur Verfügung?",
+        ],
+      },
     ],
   },
   {
@@ -85,6 +113,16 @@ export const questionCatalog = [
           "Werden die IT-Infrastruktur Komponenten permanent hinsichtlich Sicherheit überwacht und ggf. optimiert?",
         ],
       },
+      {
+        name: "Ressourcenmanagement",
+        questions: [
+          "Gibt es Tools zur Überwachung der Ressourcennutzung und Kosten?",
+        ],
+      },
+      {
+        name: "Ressourcenmanagement ",
+        questions: ["Bietet der CSP unterschiedlische Kostenmodelle an?"],
+      },
     ],
   },
   {
@@ -100,19 +138,29 @@ export const questionCatalog = [
         name: "Integrationsfähigkeiten ",
         questions: ["Gibt es ein Zugriff auf ein fremdes Ticketsystem?"],
       },
+      {
+        name: "Datenmanagement",
+        questions: ["Unterstützt der CSP offene Standards und APIs?"],
+      },
+      {
+        name: "Datenmanagement ",
+        questions: [
+          "Gibt es die Möglichkeit die Daten zurück On-Premise vollständig herunterzuladen?",
+        ],
+      },
     ],
   },
   {
     topic: "Sonstiges",
     subTopic: [
       {
-        name: "Kommunikation und Transparenz ",
+        name: "Kommunikation und Transparenz",
         questions: [
           "Kann ein Servicemanager Einsicht in Changes beim Cloudanbieter haben?",
         ],
       },
       {
-        name: "Kommunikation und Transparenz",
+        name: "Kommunikation und Transparenz ",
         questions: [
           "Werden geplante und ungeplante Wartungsarbeiten auf Seiten des Cloudanbieter an Servicemanager kommuniziert?",
         ],
@@ -121,6 +169,58 @@ export const questionCatalog = [
         name: "Sicherheitsproaktivität",
         questions: [
           "Gibt es vom Cloudanbieter die Möglichkeit proaktiv auf Sicherheitsschwachstellen in der Software/Applikation hingewiesen zu werden?",
+        ],
+      },
+    ],
+  },
+  {
+    topic: "Sicherheit und Datenschutz",
+    subTopic: [
+      {
+        name: "Datenschutz",
+        questions: [
+          "Erfüllt der Cloud Service Provider (CSP) die Anforderungen an den Datenschutz?",
+        ],
+      },
+      {
+        name: "Datenschutz ",
+        questions: ["Werden Daten während der Übertragung verschlüsselt?"],
+      },
+      {
+        name: "Datenschutz  ",
+        questions: ["Werden heiße/Kalte Daten verschlüsselt?"],
+      },
+      {
+        name: "Zugriffsmanagement",
+        questions: ["Unterstützt der CSP rollenbasierten Zugriff?"],
+      },
+      {
+        name: "sicherheit und Risikomanagement",
+        questions: [
+          "Gibt es eine klare Richtlinie für den Umgang mit Sicherheitsvorfällen?",
+        ],
+      },
+      {
+        name: "sicherheit und Risikomanagement ",
+        questions: [
+          "Bietet der Service standardmäßig Multi-Faktor-Authentifizierung an?",
+        ],
+      },
+      {
+        name: "sicherheit und Risikomanagement  ",
+        questions: [
+          "Werden regelmäßige unabhängige Sicherheitsaudits durch den CSP durchgeführt?",
+        ],
+      },
+    ],
+  },
+  {
+    topic: "Compliance und Regelungen",
+    subTopic: [
+      {
+        name: "Kommunikation und Transparenz ",
+        questions: [
+          "Werden die aktuellen Regelung zur Arbeitsnehmerüberlassung (ANÜ) eingehalten?",
         ],
       },
     ],
