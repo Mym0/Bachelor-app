@@ -79,7 +79,7 @@ export const questionCatalog = [
         ],
       },
       {
-        name: "Datenmanagement",
+        name: "Datenmanagement  ",
         questions: [
           "Bietet der Cloud-Service Datenredundanz an mehreren geografischen Standorten?",
         ],
@@ -187,7 +187,7 @@ export const questionCatalog = [
         questions: ["Werden Daten während der Übertragung verschlüsselt?"],
       },
       {
-        name: "Datenschutz  ",
+        name: " Datenschutz",
         questions: ["Werden heiße/Kalte Daten verschlüsselt?"],
       },
       {
@@ -207,7 +207,7 @@ export const questionCatalog = [
         ],
       },
       {
-        name: "sicherheit und Risikomanagement  ",
+        name: " sicherheit und Risikomanagement",
         questions: [
           "Werden regelmäßige unabhängige Sicherheitsaudits durch den CSP durchgeführt?",
         ],
@@ -218,7 +218,7 @@ export const questionCatalog = [
     topic: "Compliance und Regelungen",
     subTopic: [
       {
-        name: "Kommunikation und Transparenz ",
+        name: "Kommunikation und Transparenz  ",
         questions: [
           "Werden die aktuellen Regelung zur Arbeitsnehmerüberlassung (ANÜ) eingehalten?",
         ],
