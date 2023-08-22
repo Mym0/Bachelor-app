@@ -24,7 +24,7 @@ function App() {
   const [currentTopicIndex, setCurrentTopicIndex] = useState(0);
   const [modal, setModal] = useState(false);
   const [reset, setReset] = useState(false);
-  const [infoModal, setInfoModal] = useState(false);
+  const [infoModal, setInfoModal] = useState(true);
 
   const [activeIndex, setActiveIndex] = useState(0);
   const [animating, setAnimating] = useState(false);
@@ -75,9 +75,6 @@ function App() {
     }
   };
 
-  useEffect(() => {
-    console.log("answer has changes and became ", answers);
-  }, [answers]);
 
   {
     items.map((subtopic) => (
@@ -131,6 +128,7 @@ function App() {
 
   const toggle = () => setModal(!modal);
   const toggleInfo = () => setInfoModal(!infoModal);
+
   return (
     <div className="">
       <div className="container_header">
@@ -302,7 +300,7 @@ function App() {
           </table>
         </ModalBody>
         <ModalFooter>
-          <button onClick={toggleInfo}>Schließen</button>
+          <button onClick={toggleInfo}>Zu den Fragen</button>
         </ModalFooter>
       </Modal>
     </div>

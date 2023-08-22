@@ -30,7 +30,7 @@ export const questionCatalog = [
       {
         name: "Changemanagement",
         questions: [
-          "Betreibt der Cloud-Service-Provider ein Change- bzw. Testmanagement?",
+          "Betreibt der Cloudanbieter ein Change- bzw. Testmanagement?",
         ],
       },
       {
@@ -188,26 +188,26 @@ export const questionCatalog = [
       },
       {
         name: " Datenschutz",
-        questions: ["Werden heiße/Kalte Daten verschlüsselt?"],
+        questions: ["Werden heiße/kalte Daten verschlüsselt?"],
       },
       {
         name: "Zugriffsmanagement",
         questions: ["Unterstützt der CSP rollenbasierten Zugriff?"],
       },
       {
-        name: "sicherheit und Risikomanagement",
+        name: "Sicherheit und Risikomanagement",
         questions: [
           "Gibt es eine klare Richtlinie für den Umgang mit Sicherheitsvorfällen?",
         ],
       },
       {
-        name: "sicherheit und Risikomanagement ",
+        name: "Sicherheit und Risikomanagement ",
         questions: [
           "Bietet der Service standardmäßig Multi-Faktor-Authentifizierung an?",
         ],
       },
       {
-        name: " sicherheit und Risikomanagement",
+        name: " Sicherheit und Risikomanagement",
         questions: [
           "Werden regelmäßige unabhängige Sicherheitsaudits durch den CSP durchgeführt?",
         ],
