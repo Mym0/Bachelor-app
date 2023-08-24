@@ -1,11 +1,13 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { questionCatalog } from "./utils/questionCatalog";
 import Subtopic from "./components/Subtopic/Subtopic.component";
 import Results from "./components/Results/Results.component";
+// Importing styles for Carousel and bootstrap
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./App.css";
+// Tooltip and modal components from reactstrap
 import { Tooltip } from "react-tooltip";
 import {
   Modal,
@@ -19,18 +21,24 @@ import {
 } from "reactstrap";
 
 function App() {
+  // State to manage user answers
   const [answers, setAnswers] = useState({});
+  // State to keep track of unknown answers
   const [unknownAnswer, setUnknownAnswer] = useState([]);
+  // State to track the current topic index
   const [currentTopicIndex, setCurrentTopicIndex] = useState(0);
+  // State to control the modal visibility
   const [modal, setModal] = useState(false);
   const [reset, setReset] = useState(false);
-  const [infoModal, setInfoModal] = useState(false);
-
+  const [infoModal, setInfoModal] = useState(true);
+  // States related to the carousel functionality
   const [activeIndex, setActiveIndex] = useState(0);
   const [animating, setAnimating] = useState(false);
+  // Derive the current topic and subtopics from the questionCatalog
   const topic = questionCatalog[currentTopicIndex];
   const items = questionCatalog[currentTopicIndex].subTopic;
 
+  // Carousel control function to move to the next item
   const next = () => {
     if (animating) return;
     if (activeIndex === items.length - 1) {
@@ -41,6 +49,7 @@ function App() {
     setActiveIndex(nextIndex);
   };
 
+  // Carousel control function to move to the previous item
   const previous = () => {
     if (animating) return;
     if (activeIndex === 0) {
@@ -51,11 +60,13 @@ function App() {
     setActiveIndex(nextIndex);
   };
 
+  // Carousel control function to jump to a specific index
   const goToIndex = (newIndex) => {
     if (animating) return;
     setActiveIndex(newIndex);
   };
 
+  // Function to handle user's answer and update the state accordingly
   const handleAnswer = (id, answer) => {
     if (answer === null) return;
 
@@ -74,10 +85,6 @@ function App() {
       }
     }
   };
-
-  useEffect(() => {
-    console.log("answer has changes and became ", answers);
-  }, [answers]);
 
   {
     items.map((subtopic) => (
@@ -107,14 +114,16 @@ function App() {
     );
   });
 
+  // Resetting the application
   const resetAnswers = () => {
     setAnswers({});
     setUnknownAnswer([]);
     setCurrentTopicIndex(0);
-    setReset(!reset);
     setActiveIndex(0);
+    setReset(!reset);
   };
 
+  // Control function to move to the next topic
   const nextTopic = () => {
     if (currentTopicIndex < questionCatalog.length - 1) {
       setCurrentTopicIndex(currentTopicIndex + 1);
@@ -122,6 +131,7 @@ function App() {
     }
   };
 
+  // Control function to move to the previous topic
   const prevTopic = () => {
     if (currentTopicIndex > 0) {
       setCurrentTopicIndex(currentTopicIndex - 1);
@@ -129,8 +139,11 @@ function App() {
     }
   };
 
+  // Control the modal visibility
   const toggle = () => setModal(!modal);
   const toggleInfo = () => setInfoModal(!infoModal);
+
+  // Here starts the rendering
   return (
     <div className="">
       <div className="container_header">
@@ -302,7 +315,7 @@ function App() {
           </table>
         </ModalBody>
         <ModalFooter>
-          <button onClick={toggleInfo}>Schließen</button>
+          <button onClick={toggleInfo}>Zu den Fragen</button>
         </ModalFooter>
       </Modal>
     </div>

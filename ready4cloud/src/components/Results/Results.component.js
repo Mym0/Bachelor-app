@@ -1,14 +1,25 @@
 import React from "react";
 import { jsPDF } from "jspdf";
 import { questionCatalog } from "../../utils/questionCatalog";
-
+/**
+ * Results Component
+ *
+ * Computes and displays the results based on user's answers.
+ *
+ * Props:
+ * - answers: An object containing answers for questions, indexed by question id.
+ * - unknownAnswer: Contains questions to which the user didn't provide an answer.
+ */
 function Results({ answers, unknownAnswer }) {
+  // Compute the results for each topic
   const results = questionCatalog.map((topic) => {
+    // Calculate the total number of questions in the topic
     const totalQuestions = topic.subTopic.reduce(
       (total, subtopic) => total + subtopic.questions.length,
       0
     );
 
+    // Calculate the number of 'yes' answers for the topic
     const yesCount = topic.subTopic.reduce((total, subtopic) => {
       return (
         total +
@@ -19,6 +30,7 @@ function Results({ answers, unknownAnswer }) {
       );
     }, 0);
 
+    // Calculate the percentage of 'yes' answers for the topic
     const percentageYes = ~~((yesCount / totalQuestions) * 100);
     return {
       topic: topic.topic,
@@ -26,10 +38,13 @@ function Results({ answers, unknownAnswer }) {
     };
   });
 
-  const averagePercentage =
-    ((results.reduce((sum, result) => sum + result.percentageYes, 0) /
-    results.length)).toFixed(2);
+  // Calculate the average 'yes' percentage over all topics
+  const averagePercentage = (
+    results.reduce((sum, result) => sum + result.percentageYes, 0) /
+    results.length
+  ).toFixed(2);
 
+  // Determine the rating based on the percentage
   const getRating = (percentageYes) => {
     if (percentageYes <= 1) {
       return { color: "white", text: "" };
@@ -51,6 +66,7 @@ function Results({ answers, unknownAnswer }) {
     return subtopic ? subtopic.questions[index] : "Error: subtopic not found";
   });
 
+  // Handle the Downloading of unanswered Questions
   const downloadUnknownQuestionsPdf = () => {
     const doc = new jsPDF();
 
@@ -108,6 +124,7 @@ function Results({ answers, unknownAnswer }) {
           </button>
         </div>
       </div>
+
       <div className="containers-topics">
         {results.map((result) => {
           const rating = getRating(result.percentageYes);
@@ -140,6 +157,7 @@ function Results({ answers, unknownAnswer }) {
           );
         })}
       </div>
+      
     </div>
   );
 }
