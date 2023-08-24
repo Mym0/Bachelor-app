@@ -1,3 +1,13 @@
+/**
+ * questionCatalog contains a structured list of topics and subtopics,
+ * each with its set of questions.
+ *
+ * Structure:
+ * - topic: Represents the main topic name.
+ * - subTopic: An array of subtopics, where each subtopic contains:
+ *   - name: Name of the subtopic.
+ *   - questions: An array of questions related to that subtopic.
+ */
 export const questionCatalog = [
   {
     topic: "System- und Anwendungsmanagement",

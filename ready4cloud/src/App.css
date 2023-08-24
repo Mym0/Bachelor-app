@@ -1,3 +1,4 @@
+/* Global Settings */
 html {
   height: 100% !important;
   width: 100% !important;
@@ -50,6 +51,7 @@ h2 {
   background-color: #008cba !important;
 }
 
+/* Styles for pagination dots of the carousel */
 .slick-dots {
   bottom: 10px !important;
 }
